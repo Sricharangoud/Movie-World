@@ -12,7 +12,7 @@ const CategoryPage = () => {
 
   const fetchMovies = async (pageNumber) => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/movies/language/${lang}?page=${pageNumber}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/movies/language/${lang}?page=${pageNumber}`);
       if (pageNumber === 1) {
         setMovies(data.results);
       } else {

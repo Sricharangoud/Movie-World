@@ -12,7 +12,7 @@ const useMovieStore = create((set) => ({
   fetchTrending: async (page = 1) => {
     set({ loading: true });
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/movies/trending?page=${page}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/movies/trending?page=${page}`);
       set((state) => ({ 
         trendingMovies: page === 1 ? data.results : [...state.trendingMovies, ...data.results],
         loading: false 
@@ -25,7 +25,7 @@ const useMovieStore = create((set) => ({
   fetchTollywood: async (page = 1) => {
     set({ loading: true });
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/movies/tollywood?page=${page}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/movies/tollywood?page=${page}`);
       set((state) => ({ 
         tollywoodMovies: page === 1 ? data.results : [...state.tollywoodMovies, ...data.results],
         loading: false 
@@ -38,7 +38,7 @@ const useMovieStore = create((set) => ({
   fetchTopRated: async (page = 1) => {
     set({ loading: true });
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/movies/top-rated?page=${page}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/movies/top-rated?page=${page}`);
       set((state) => ({ 
         topRatedMovies: page === 1 ? data.results : [...state.topRatedMovies, ...data.results],
         loading: false 
@@ -51,7 +51,7 @@ const useMovieStore = create((set) => ({
   fetchMovieDetails: async (id) => {
     set({ loading: true, movieDetails: null });
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/movies/${id}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/movies/${id}`);
       set({ movieDetails: data, loading: false });
     } catch (error) {
       set({ error: error.message, loading: false });

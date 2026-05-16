@@ -23,7 +23,7 @@ const Navbar = () => {
     const delayDebounceFn = setTimeout(async () => {
       if (searchTerm.trim()) {
         try {
-          const { data } = await axios.get(`http://localhost:5000/api/movies/search?query=${searchTerm}`);
+          const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/movies/search?query=${searchTerm}`);
           setSearchResults(data.results.slice(0, 5));
         } catch (error) {
           console.error(error);

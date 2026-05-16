@@ -14,7 +14,7 @@ const Dashboard = () => {
     const fetchWatchlist = async () => {
       try {
         const config = { headers: { Authorization: `Bearer ${user.token}` } };
-        const { data } = await axios.get('http://localhost:5000/api/users/watchlist', config);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users/watchlist`, config);
         setWatchlist(data.movies || []);
       } catch (error) {
         console.error(error);
@@ -28,7 +28,7 @@ const Dashboard = () => {
   const removeFromWatchlist = async (movieId) => {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      await axios.delete(`http://localhost:5000/api/users/watchlist/${movieId}`, config);
+      await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users/watchlist/${movieId}`, config);
       setWatchlist(watchlist.filter(m => m.movieId !== movieId));
     } catch (error) {
       console.error(error);

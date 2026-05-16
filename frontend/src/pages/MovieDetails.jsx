@@ -7,7 +7,7 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import { motion } from 'framer-motion';
 
-const socket = io('http://localhost:5000');
+const socket = io(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}`);
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -54,7 +54,7 @@ const MovieDetails = () => {
     if (!user) return alert('Please login first');
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      await axios.post('http://localhost:5000/api/users/watchlist', {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users/watchlist`, {
         movieId: movieDetails.id,
         title: movieDetails.title,
         posterPath: movieDetails.poster_path
