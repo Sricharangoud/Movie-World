@@ -18,11 +18,13 @@ import movieRoutes from './routes/movieRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
+console.log("Imports completed successfully.");
+
 // Connect to Database
 // connectDB();
 
-
 const app = express();
+console.log("Express app created.");
 const httpServer = createServer(app);
 
 // Socket.io Setup
@@ -95,6 +97,8 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
+console.log(`Attempting to bind server to port ${PORT} on 0.0.0.0...`);
+
 httpServer.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+  console.log(`Server successfully started in ${process.env.NODE_ENV} mode on port ${PORT}`);
 });
