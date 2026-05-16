@@ -88,6 +88,14 @@ const Navbar = () => {
                 placeholder="Search movies..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && searchResults.length > 0) {
+                    const firstMovie = searchResults[0];
+                    navigate(`/movie/${firstMovie.id || firstMovie.tmdbId}`);
+                    setSearchTerm('');
+                    setSearchResults([]);
+                  }
+                }}
                 className="w-full bg-slate-800 text-gray-200 border border-slate-700 rounded-full py-2 px-4 pl-10 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
               />
               <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
