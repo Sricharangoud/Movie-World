@@ -72,6 +72,12 @@ const apiLimiter = rateLimit({
 });
 app.use('/api/', apiLimiter);
 
+// Clean double slashes (Fixes Vercel Env Var trailing slash issue)
+app.use((req, res, next) => {
+  req.url = req.url.replace(/\/\//g, '/');
+  next();
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/movies', movieRoutes);
